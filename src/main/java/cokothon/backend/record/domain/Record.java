@@ -40,4 +40,14 @@ public class Record {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    public void updateRecord(String content, Integer startPage, Integer endPage, ReadingStatus status) {
+        this.content = content;
+        this.startPage = startPage;
+        this.endPage = endPage;
+        this.readingStatus = status;
+    }
+
+
+
 }
