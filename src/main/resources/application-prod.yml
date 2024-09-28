@@ -36,7 +36,7 @@ spring:
         dialect.storage_engine: innodb
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 jwt:
   secret_key: ${JWT_SECRET_KEY}
