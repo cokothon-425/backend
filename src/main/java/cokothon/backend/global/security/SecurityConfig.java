@@ -29,6 +29,13 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private static final String[] SWAGGER_API_PATH = {
+            //swagger
+            "/v3/api-docs/**",
+            "/api-docs/**",
+            "/swagger-ui.html",
+            "/swagger-ui/**"
+    };
 
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {
@@ -58,6 +65,7 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((httpRequests) ->
                         httpRequests
+                                .requestMatchers(SWAGGER_API_PATH).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

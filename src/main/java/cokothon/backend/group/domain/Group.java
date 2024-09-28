@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "group")
+@Table(name = "book_group")
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @Builder
@@ -24,8 +24,10 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = true)
     private String description;
+
+    @Column(name = "max_count", nullable = false)
+    private Integer maxCount;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -36,6 +38,6 @@ public class Group {
     private Member leader;
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 }

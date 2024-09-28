@@ -38,7 +38,7 @@ public class Record {
     private ReadingStatus readingStatus;
 
     @CreatedDate
-    @Column(updatable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     public void updateRecord(String content, Integer startPage, Integer endPage, ReadingStatus status) {
@@ -47,7 +47,4 @@ public class Record {
         this.endPage = endPage;
         this.readingStatus = status;
     }
-
-
-
 }

@@ -76,7 +76,7 @@ public class CustomOAuth2User implements OAuth2User, UserDetails {
         return map.get("nickname");
     }
 
-    public Long getUserId() {
+    public Long getMemberId() {
         return (Long) attributes.get("userId");
     }
 
