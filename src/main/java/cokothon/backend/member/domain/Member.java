@@ -23,7 +23,7 @@ public class Member {
     private String name;
 
     @Column(nullable = false)
-    private String email;
+    private String kakaoId;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)
