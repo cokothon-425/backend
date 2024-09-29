@@ -85,6 +85,7 @@ public class GroupService {
                 .toList();
 
         return GroupDTO.builder()
+                .id(groupId)
                 .name(group.getName())
                 .description(group.getDescription())
                 .maxCount(group.getMaxCount())

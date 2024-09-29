@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class GroupDisplayResponseDTO {
+    private Long id;
     private String name;
     private String description;
     private BookDTO book;
@@ -19,6 +20,7 @@ public class GroupDisplayResponseDTO {
     public static GroupDisplayResponseDTO create(Group group, int currentCount) {
         return GroupDisplayResponseDTO
                 .builder()
+                .id(group.getId())
                 .name(group.getName())
                 .description(group.getDescription())
                 .book(BookDTO.create(group.getBook()))
