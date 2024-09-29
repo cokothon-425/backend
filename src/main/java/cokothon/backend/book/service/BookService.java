@@ -66,7 +66,7 @@ public class BookService {
                 String author = authorsArray.get(j).getAsString();
 
                 if (i > 0) {
-                    authorBuilder.append(", ");
+                    authorBuilder.append(" ");
                 }
 
                 authorBuilder.append(author);
