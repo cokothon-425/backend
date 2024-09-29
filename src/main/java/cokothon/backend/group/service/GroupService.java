@@ -12,6 +12,7 @@ import cokothon.backend.group.repository.GroupMemberRepository;
 import cokothon.backend.group.repository.GroupRepository;
 import cokothon.backend.group.repository.GroupSpecifications;
 import cokothon.backend.member.domain.Member;
+import cokothon.backend.member.dto.MemberDTO;
 import cokothon.backend.member.repository.MemberRepository;
 import cokothon.backend.record.dto.RecordDTO;
 import cokothon.backend.record.service.RecordService;
@@ -84,6 +85,11 @@ public class GroupService {
                 .map(RecordDTO::create)
                 .toList();
 
+        List<MemberDTO> members = groupMemberRepository.findAllByGroupId(groupId)
+                .stream()
+                .map((groupMember) -> MemberDTO.create(groupMember.getMember()))
+                .toList();
+
         return GroupDTO.builder()
                 .id(groupId)
                 .name(group.getName())
@@ -91,6 +97,7 @@ public class GroupService {
                 .maxCount(group.getMaxCount())
                 .currentCount((int) currentCount)
                 .leaderName(group.getLeader().getName())
+                .members(members)
                 .book(BookDTO.create(group.getBook()))
                 .records(records)
                 .build();
@@ -98,13 +105,18 @@ public class GroupService {
 
     @Transactional
     public void joinGroup(JoinGroupRequestDTO requestDTO, Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new CustomException(GlobalErrorCode.MEMBER_NOT_FOUND));
+        if (groupMemberRepository.existsByGroupIdAndMemberId(requestDTO.getGroupId(), memberId)) {
+            throw new CustomException(GlobalErrorCode.GROUP_MEMBER_ALREADY_EXISTS);
+        }
 
         Long groupId = requestDTO.getGroupId();
 
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new CustomException(GlobalErrorCode.GROUP_NOT_FOUND));
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CustomException(GlobalErrorCode.MEMBER_NOT_FOUND));
+
 
         GroupMember groupMember = GroupMember.builder()
                 .group(group)

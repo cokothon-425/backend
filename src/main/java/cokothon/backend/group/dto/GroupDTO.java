@@ -1,6 +1,7 @@
 package cokothon.backend.group.dto;
 
 import cokothon.backend.book.dto.BookDTO;
+import cokothon.backend.member.dto.MemberDTO;
 import cokothon.backend.record.dto.RecordDTO;
 import lombok.*;
 
@@ -18,5 +19,6 @@ public class GroupDTO {
     private String leaderName;
     private Integer maxCount;
     private Integer currentCount;
+    private List<MemberDTO> members;
     private List<RecordDTO> records;
 }

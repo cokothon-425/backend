@@ -14,7 +14,8 @@ public enum GlobalErrorCode implements ErrorCode {
     BOOK_NOT_FOUND("책을 찾을 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR),
     GROUP_NOT_FOUND("독서모임을 찾을 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR),
     GROUP_MEMBER_NOT_FOUND("독서모임 멤버 정보를 찾을 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR),
-    RECORD_NOT_FOUND("기록을 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+    RECORD_NOT_FOUND("기록을 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    GROUP_MEMBER_ALREADY_EXISTS("독서모임에 멤버가 이미 존재합니다.", HttpStatus.BAD_REQUEST);
 
     private final String message;
     private final HttpStatus httpStatus;
