@@ -46,9 +46,12 @@ public class GroupService {
                 .toList();
     }
 
-    public GroupMember findGroupMember(Long groupId, Long memberId) {
-        return groupMemberRepository.findByGroupIdAndMemberId(groupId, memberId)
-                .orElseThrow(() -> new CustomException(GlobalErrorCode.GROUP_MEMBER_NOT_FOUND));
+
+    public List<GroupDisplayResponseDTO> getAllGroups() {
+        return groupRepository.findAll()
+                .stream()
+                .map(this::getGroupDisplay)
+                .toList();
     }
 
     @Transactional

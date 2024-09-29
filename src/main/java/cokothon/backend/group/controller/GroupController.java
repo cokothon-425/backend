@@ -36,6 +36,12 @@ public class GroupController {
         return ResponseEntity.ok(groupService.getGroupDetailById(groupId));
     }
 
+    @Operation(summary = "모든 독서모임 조회")
+    @GetMapping
+    public ResponseEntity<List<GroupDisplayResponseDTO>> getAllGroups() {
+        return ResponseEntity.ok(groupService.getAllGroups());
+    }
+
     @Operation(summary = "사용자가 독서모임에 참여할 때 사용")
     @PostMapping("/join")
     public ResponseEntity<?> join(
