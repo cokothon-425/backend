@@ -64,7 +64,12 @@ public class BookService {
 
             for (int j = 0; j < authorSize; j++) {
                 String author = authorsArray.get(j).getAsString();
-                authorBuilder.append(", ").append(author);
+
+                if (i > 0) {
+                    authorBuilder.append(", ");
+                }
+
+                authorBuilder.append(author);
             }
 
             BookDTO book = BookDTO.builder()
